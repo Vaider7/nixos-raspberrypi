@@ -14,7 +14,7 @@
   inputs = {
     # use fork to allow disabling modules introduced by mkRemovedOptionModule
     # and similar functions
-    nixpkgs.url = "github:nvmd/nixpkgs/modules-with-keys";
+    nixpkgs.url = "github:Vaider7/nixpkgs";
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     argononed = {
