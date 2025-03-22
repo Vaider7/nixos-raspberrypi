@@ -34,6 +34,14 @@ inputs = {
 Pre-built packages are provided for `nixpkgs` version locked with `flake.lock`.
 Depending on the circumstances, it may be either stable `nixpkgs` or `nixpkgs-unstable`. Check `inputs.nixpkgs` in `flake.nix` if it's important for you.
 
+Can be enabled globally to the NixOS configuration:
+```nix
+imports = with nixos-raspberrypi.nixosModules; [
+  trusted-nix-caches
+];
+```
+
+Or for the flake only:
 ```flake.nix
 nixConfig = {
   extra-substituters = [
@@ -77,6 +85,9 @@ imports = [
   # Required: Bootloaders, linux kernel, firmware, raspberry's utils
   # additionally, `nixpkgs.rpi` with _all_ overlays applied (see below)
   nixos-raspberrypi.lib.inject-overlays
+
+  # Adds raspberry overlay on top of `nixpkgs`, so that you may access all optimized packages via `pkgs.rpi`
+  nixos-raspberrypi.nixosModules.nixpkgs-rpi
 
   # Optional: Applies overlays with optimized packages to the global scope, 
   # including ffmpeg_{4,6,7}, kodi, libcamera, SDL2, vlc

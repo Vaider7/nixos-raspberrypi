@@ -1,19 +1,8 @@
 { lib, self, ... }:
 
 {
-  mkRaspberrypiBootloader = variant: bootloader: ({ config, pkgs, ... }: {
-    imports = [ self.nixosModules.default ];
-    boot.loader.raspberryPi = {
-      inherit variant bootloader;
-    };
-  });
-
   inject-overlays = { config, lib, ... }: {
     nixpkgs.overlays = [
-      (final: prev: {
-        rpi = self.legacyPackages.${config.nixpkgs.system};
-      })
-
       self.overlays.bootloader
 
       self.overlays.vendor-kernel
